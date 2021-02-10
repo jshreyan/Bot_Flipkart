@@ -22,7 +22,7 @@ tenure_input = CONFIG.get('EMIOPTIONS', 'TENURE')
 
 #url = input()
 #url = "https://www.flipkart.com/redmi-note-7-ruby-red-64-gb/p/itmfdzvfanddhqc7?pid=MOBFDXZ39VMKXZAA&lid=LSTMOBFDXZ39VMKXZAAAJKJYR&marketplace=FLIPKART&fm=personalisedRecommendation%2Fp2p-same&iid=R%3As%3Bp%3AMOBFDXZ376XRTZXH%3Bpt%3Ahp%3Buid%3Ae1401e5b-fa4c-90c6-31a2-de174d36e55e%3B.MOBFDXZ39VMKXZAA.LSTMOBFDXZ39VMKXZAAAJKJYR&ppt=HomePage&ppn=Home&ssid=9hhfdo0q4w0000001557248900979&otracker=hp_reco_Suggested%2Bfor%2BYou_1_10.productCard.PMU_V2_Redmi%2BNote%2B7%2B%2528Ruby%2BRed%252C%2B64%2BGB%2529_MOBFDXZ39VMKXZAA.LSTMOBFDXZ39VMKXZAAAJKJYR_personalisedRecommendation%2Fp2p-same_0&cid=MOBFDXZ39VMKXZAA.LSTMOBFDXZ39VMKXZAAAJKJYR"
-url="https://www.flipkart.com/redmi-note-7-pro-neptune-blue-64-gb/p/itmfegkx8nbcze6t?pid=MOBFDXZ376XRTZXH&lid=LSTMOBFDXZ376XRTZXHWRK63O&marketplace=FLIPKART&sattr[]=color&sattr[]=storage&sattr[]=ram&st=color&otracker=search"
+url="https://www.flipkart.com/redmi-9-prime-mint-green-64-gb/p/itmcccb4b3a6c2e0?pid=MOBFUSEP5YQJK4RE&lid=LSTMOBFUSEP5YQJK4REH2ETK3&marketplace=FLIPKART&srno=s_1_1&otracker=AS_QueryStore_OrganicAutoSuggest_2_3_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_2_3_na_na_na&fm=SEARCH&iid=e7f84edf-2735-4955-87d3-3c40300e22eb.MOBFUSEP5YQJK4RE.SEARCH&ppt=sp&ppn=sp&ssid=93jetwba680000001612935429783&qH=fe263b216b5e362a"
 
 #print(url)
 print('\nLogging in with username:',email_inp)
@@ -50,7 +50,7 @@ def login():
         print("Logging In..")
         try:
             login = WebDriverWait(driver, 20).until(
-                EC.element_to_be_clickable((By.CSS_SELECTOR, "._34niwY"))
+                EC.element_to_be_clickable((By.CSS_SELECTOR, "._3BvnxG"))   
             )
             print('Login Button Clickable')
         except:
@@ -66,39 +66,41 @@ def login_submit():
     try:
         if 'Enter Password' in driver.page_source:
             print('Trying Usual method of Login.')
-            email = driver.find_element_by_css_selector(".Km0IJL ._2zrpKA")
-            passd = driver.find_element_by_css_selector(".Km0IJL ._3v41xv")
-            email.clear()
+            email = driver.find_element_by_css_selector("body > div._2Sn47c > div > div > div > div > div._36HLxm.col.col-3-5 > div > form > div:nth-child(1) > input")
+            passd = driver.find_element_by_css_selector("body > div._2Sn47c > div > div > div > div > div._36HLxm.col.col-3-5 > div > form > div:nth-child(2) > input")
+            email.clear() 
             passd.clear()
             email.send_keys(email_inp)
+            time.sleep(0.5)
             passd.send_keys(pass_inp)
+            time.sleep(0.5)
             try:
                 form = WebDriverWait(driver, 20).until(
-                    EC.element_to_be_clickable((By.CSS_SELECTOR, ".Km0IJL ._7UHT_c"))
+                    EC.element_to_be_clickable((By.CSS_SELECTOR, "body > div._2Sn47c > div > div > div > div > div._36HLxm.col.col-3-5 > div > form > div._1D1L_j > button"))
                 )
                 print('Submit Button Clickable')
             except:
                 print('Submit Button Not Clickable')
             form.click()     
-        else:
+        else: #Login or Signup
             print('Trying Alternate method of Login.')
-            email = driver.find_element_by_css_selector("._2zrpKA")
+            email = driver.find_element_by_css_selector("#container > div > div._1eztQ7 > div > div._3efVlV > div:nth-child(1) > div > div > div > div > div.col.col-5-12 > div > form > div.IiD88i.GtCYSF > input")
             email.clear()
             email.send_keys(email_inp)
             loginnext = WebDriverWait(driver, 5).until(
-                            EC.element_to_be_clickable((By.CSS_SELECTOR, "._1LctnI"))
+                            EC.element_to_be_clickable((By.CSS_SELECTOR, "#container > div > div._1eztQ7 > div > div._3efVlV > div:nth-child(1) > div > div > div > div > div.col.col-5-12 > div > form > div._25jOHM > button"))
                         )
             loginnext.click()
             loginpassword = WebDriverWait(driver, 5).until(
-                            EC.element_to_be_clickable((By.CSS_SELECTOR, ".jUwFiZ"))
+                            EC.element_to_be_clickable((By.CSS_SELECTOR, "#container > div > div._1eztQ7 > div > div._3efVlV > div:nth-child(1) > div > div > div > div > div.col.col-5-12 > div > form > div:nth-child(2) > input"))
                         )
             loginpassword.click()
             time.sleep(0.5)
-            passd = driver.find_elements_by_css_selector("._2zrpKA")[1]
+            passd = driver.find_elements_by_css_selector("#container > div > div._1eztQ7 > div > div._3efVlV > div:nth-child(1) > div > div > div > div > div.col.col-5-12 > div > form > div:nth-child(2) > input")[0]
             passd.clear()
             passd.send_keys(pass_inp)
             form = WebDriverWait(driver, 20).until(
-                            EC.element_to_be_clickable((By.CSS_SELECTOR, "._1LctnI"))
+                            EC.element_to_be_clickable((By.CSS_SELECTOR, "#container > div > div._1eztQ7 > div > div._3efVlV > div:nth-child(1) > div > div > div > div > div.col.col-5-12 > div > form > div._25jOHM > button"))
                         )
             form.click()
         print("Logged In Successfully")
@@ -117,7 +119,7 @@ def buy_check():
             try:
                 driver.refresh()
                 time.sleep(0.2)
-                buyprod = driver.find_element_by_css_selector("._1k1QCg ._7UHT_c")
+                buyprod = driver.find_element_by_css_selector("#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-5-12._78xt5Y > div:nth-child(2) > div > ul > li:nth-child(2) > form > button")
                 print('Buy Button Clickable')
                 nobuyoption = False
             except:
@@ -162,10 +164,11 @@ def deliver_option():
 def deliver_continue():
     try:
         addr_sal_avl = True
+
         while addr_sal_avl:
             try:
                 address_sel = WebDriverWait(driver, 5).until(
-                    EC.element_to_be_clickable((By.CSS_SELECTOR, "._3K1hJZ ._7UHT_c"))
+                    EC.element_to_be_clickable((By.CSS_SELECTOR, "#"+addr_input+" > button"))
                 )
                 address_sel.click()
                 addr_sal_avl = False
@@ -181,7 +184,7 @@ def deliver_continue():
         
 def order_summary_continue():
     try:
-        press_continue =  driver.find_element_by_css_selector("._2Q4i61")             
+        press_continue =  driver.find_element_by_css_selector("#to-payment > button")             
         press_continue.click()
         print('Continue Button Clicked Successfully')
     except:
@@ -198,7 +201,7 @@ def choose_payment():
 
         if pay_opt_input == 'EMI_OPTIONS':
             emi_button = WebDriverWait(driver, 5).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, ".B7BM8s"))
+                EC.presence_of_element_located((By.CSS_SELECTOR, "#container > div > div._1eztQ7 > div > div._3efVlV > div._3E8aIl.gGqMBW > div > div > div:nth-child(2) > div > label._2Fn-Ln._30jOKh._2KEUG6._18Z3T6._3L7Pww > div._2jIO64._3Uc2dx > div > div > div._3sKp0- > div:nth-child(2) > label:nth-child(1) > div > div > div > div.l3zHub"))
             )
             emi_button.click()
             time.sleep(0.5)
@@ -211,7 +214,7 @@ def choose_payment():
             emi_tenure.click()
             time.sleep(0.5)
             continue_emi = WebDriverWait(driver, 5).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, "._7UHT_c"))
+                EC.presence_of_element_located((By.CSS_SELECTOR, "#container > div > div._1eztQ7 > div > div._3efVlV > div._3E8aIl.gGqMBW > div > div > div:nth-child(2) > div > label._2Fn-Ln._30jOKh._2KEUG6._18Z3T6._3L7Pww > div._2jIO64._3Uc2dx > div > div > div._3sKp0- > div:nth-child(2) > label._2Fn-Ln._3xUfji._3L7Pww > div > div > div._3uljvG > div.K1BTVr > div:nth-child(2) > label._2Fn-Ln._11zGOt._3L7Pww > div._2jIO64 > div > div._3kF7Iy > button"))
             )
             continue_emi.click()
         print('Payment Method Selected Successfully')
@@ -224,7 +227,7 @@ def payment_cvv():
     try:
         payment_sel =  None
         payment_sel = WebDriverWait(driver, 5).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, "._16qL6K"))
+            EC.presence_of_element_located((By.CSS_SELECTOR, "#container > div > div._1eztQ7 > div > div._3efVlV > div._3E8aIl.gGqMBW > div > div > div:nth-child(1) > div > label._2Fn-Ln._30jOKh._2KEUG6._18Z3T6._3L7Pww > div._2jIO64._3Uc2dx > div > div > div._1ggQWf > form > div > div > input"))
         )
         payment_sel.clear()
         payment_sel.send_keys(cvv_inp)
@@ -239,7 +242,7 @@ def payment_continue():
         pay =  None
         try:
             pay = WebDriverWait(driver, 5).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, "._3K1hJZ ._7UHT_c"))
+                EC.presence_of_element_located((By.CSS_SELECTOR, "#container > div > div._1eztQ7 > div > div._3efVlV > div._3E8aIl.gGqMBW > div > div > div:nth-child(1) > div > label._2Fn-Ln._30jOKh._2KEUG6._18Z3T6._3L7Pww > div._2jIO64._3Uc2dx > div > div > div._1ggQWf > form > button"))
             )
             print('Pay Button Clickable')   
         except:
@@ -254,7 +257,7 @@ def payment_continue():
 def otp_submit():
     try:
         otp = WebDriverWait(driver, 5).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, "._3K1hJZ .l5dwor"))
+                EC.presence_of_element_located((By.CSS_SELECTOR, "#container > div > div._1eztQ7 > div > div._3efVlV > div._3E8aIl.gGqMBW > div > div > div > div > div > div.I5nXV6 > form > input"))
             )
         otp.clear()
         print('Please enter OTP here:')
@@ -262,7 +265,7 @@ def otp_submit():
         otp.send_keys(otp_input)
                     
         submit_otp = WebDriverWait(driver, 5).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, "._3K1hJZ ._7UHT_c"))
+                EC.presence_of_element_located((By.CSS_SELECTOR, "#container > div > div._1eztQ7 > div > div._3efVlV > div._3E8aIl.gGqMBW > div > div > div > div > div > div.I5nXV6 > form > button"))
             )
         submit_otp.click()
         print('OTP Submitted Successfully')
